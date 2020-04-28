@@ -11,5 +11,10 @@ pipeline {
            sh 'go build'
          }
       }
+      stage('Publish artifact') {
+         steps {
+           archiveArtifacts 'example1'
+         }
+      }
    }
 }
