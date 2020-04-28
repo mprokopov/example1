@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-           sh 'go build'
+           sh '/usr/local/go/bin/go build'
          }
       }
    }
