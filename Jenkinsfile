@@ -1,9 +1,14 @@
 pipeline {
    agent any
+
+   tools {
+    go { 'go-1.14' }
+   }
+
    stages {
       stage('Build') {
          steps {
-           sh '/usr/local/go/bin/go build'
+           sh 'go build'
          }
       }
    }
