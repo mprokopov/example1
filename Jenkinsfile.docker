@@ -1,17 +1,12 @@
 pipeline {
-  agent {
-    docker { image 'golang:alpine' }
-  }
+  agent { docker { image 'golang:alpine'} }
   stages {
     stage('Build') {
-      environment {
-        XDG_CACHE_HOME = '/tmp/.cache'
-      }
       steps {
         sh 'go build -o example1'
       }
     }
-    stage('Save artifact') {
+    stage ('Save artifact') {
       steps {
         archiveArtifacts 'example1'
       }
