@@ -4,7 +4,9 @@ pipeline {
   }
   stages {
     stage('Build') {
-      sh 'go build -o example1'
+      steps {
+        sh 'go build -o example1'
+      }
     }
   }
 }
