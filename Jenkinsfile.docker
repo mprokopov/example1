@@ -1,0 +1,10 @@
+pipeline {
+  agent {
+    docker { image 'golang:alpine' }
+  }
+  stages {
+    stage('Build') {
+      sh 'go build -o example1'
+    }
+  }
+}
