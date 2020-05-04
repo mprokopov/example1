@@ -13,7 +13,7 @@ pipeline {
       }
       stage('Build') {
          steps {
-           sh 'go build'
+           sh 'go build -o example1'
          }
       }
       stage('Publish artifact') {
