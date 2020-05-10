@@ -5,7 +5,15 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
+
+var counter = promauto.NewCounter(prometheus.CounterOpts{
+	Name: "api_calls_total",
+	Help: "The total number of processed events",
+})
 
 type Simple struct {
 	Name string
@@ -22,12 +30,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	jsonOutput, _ := json.Marshal(simple)
 
+	counter.Inc() // inc counter
+
 	fmt.Fprintln(w, string(jsonOutput))
-	// fmt.Fprintln(w, simple)
 }
 
 func main() {
 	fmt.Println("Server started normally")
 	http.HandleFunc("/", handler)
+	http.Handle("/metrics", promhttp.Handler())
+	fmt.Println("Monitoring endpoint added")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
