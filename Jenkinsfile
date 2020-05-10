@@ -6,6 +6,11 @@ pipeline {
    }
 
    stages {
+      stage('Prepare') {
+         steps {
+           sh 'go get'
+         }
+      }
       stage('Test') {
          steps {
            sh 'go test'
