@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -13,6 +15,11 @@ type Simple struct {
 	Description string
 	Url string
 }
+
+var counter = promauto.NewCounter(prometheus.CounterOpts{
+	Name: "api_calls_total_counter",
+	Help: "The total number of processed events",
+})
 
 func SimpleFactory (host string) Simple {
 	return Simple{"Hello", "World", host}
@@ -24,7 +31,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	jsonOutput, _ := json.Marshal(simple)
 
 	fmt.Fprintln(w, string(jsonOutput))
-	// fmt.Fprintln(w, simple)
+
+	counter.Inc() // add to Handler function
 }
 
 func main() {
