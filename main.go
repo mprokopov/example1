@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Simple struct {
@@ -29,5 +30,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("Server started normally")
 	http.HandleFunc("/", handler)
+	http.Handle("/metrics", promhttp.Handler())
+
+	fmt.Println("Monitoring is started")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
