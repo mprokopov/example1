@@ -30,9 +30,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	jsonOutput, _ := json.Marshal(simple)
 
-	fmt.Fprintln(w, string(jsonOutput))
-
 	counter.Inc() // add to Handler function
+
+	fmt.Fprintln(w, string(jsonOutput))
 }
 
 func main() {
