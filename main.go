@@ -22,7 +22,7 @@ var counter = promauto.NewCounter(prometheus.CounterOpts{
 })
 
 func SimpleFactory (host string) Simple {
-	return Simple{"Hello", "World", host}
+	return Simple{"Hello", "Maksym", host}
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
