@@ -48,7 +48,7 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-    - name: Check out code into the Go module directory
+    - name: Check out ansible deployment repo
       uses: actions/checkout@v2
       with:
         repository: mprokopov/example-deployment
@@ -60,4 +60,5 @@ jobs:
         name: example1 # optional
         # Destination path
         # path:  # optional
-  
+    - name: Deploy to staging
+      run: ansible-playbook -i inventories/staging/hosts.ini playbook.yml
