@@ -48,6 +48,10 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+      with:
+        repository: mprokopov/example-deployment
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2
       with:
