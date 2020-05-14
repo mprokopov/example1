@@ -43,3 +43,15 @@ jobs:
         name: example1 # optional
         # A file, directory or wildcard pattern that describes what to upload
         path: example1
+      
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2
+      with:
+        # Artifact name
+        name: example1 # optional
+        # Destination path
+        # path:  # optional
+  
