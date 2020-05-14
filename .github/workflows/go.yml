@@ -45,6 +45,7 @@ jobs:
         path: example1
       
   deploy:
+    needs: build
     runs-on: self-hosted
     steps:
     - name: Download a Build Artifact
